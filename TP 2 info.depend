@@ -1,0 +1,5 @@
+# depslib dependency file v1.0
+1537893638 source:c:\users\emrick-pc-portable\documents\github\mini-pj-cinema\main.cpp
+	<iostream>
+	<vector>
+

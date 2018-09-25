@@ -82,6 +82,11 @@ void print_film_list(vector<film> ListeFilms)
 
 }
 
+void afficher_infos_acteur(acteur acteuraverif)
+{
+    cout << acteuraverif.nom << " " << acteuraverif.prenom << " ne en " << acteuraverif.date_de_naissance << endl;
+}
+
 void afficher_infos_film(film filmaverif)
 {
     cout << "Informations sur le film: " << endl ;
@@ -89,7 +94,11 @@ void afficher_infos_film(film filmaverif)
     cout << "Annee: " << filmaverif.annee << endl;
     cout << "Duree: " << filmaverif.duree << endl;
     cout << "Genre: " << filmaverif.genre << endl;
-    // Ici on gere affichage acteur
+    cout << "Acteurs: " << endl;
+    for (unsigned int i = 0; i < 3; i++)
+    {
+        afficher_infos_acteur(filmaverif.noms[i]);
+    }
 }
 
 void menu_cinema(vector<film> ListeFilms)

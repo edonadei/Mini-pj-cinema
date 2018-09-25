@@ -101,7 +101,7 @@ void menu_cinema(vector<film> ListeFilms)
 
     for (unsigned int i = 0; i < ListeFilms.size(); i++)
     {
-        if (ListeFilms[i].titre == choix)
+        if (ListeFilms[i].titre.find(choix) != string::npos)
         {
             afficher_infos_film(ListeFilms[i]);
         } else {

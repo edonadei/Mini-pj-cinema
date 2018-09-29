@@ -1,33 +1,5 @@
-#include <iostream>
-#include <vector>
+#include "struct.h"
 
-using namespace std;
-
-struct realisateur
-{
-    string nom;
-    string prenom;
-    string date_de_naissance;
-};
-
-struct acteur
-{
-    string nom;
-    string prenom;
-    int date_de_naissance;
-
-    // Ici un commentaire utile
-};
-
-struct film
-{
-     string titre;
-     int annee;
-     realisateur nomrealisateur;
-     acteur noms[3];
-     int duree;
-     string genre;
-};
 
 film create_film(string _titre, int _annee, realisateur _nomrealisateur, int _duree, string _genre, acteur _acteur1, acteur _acteur2, acteur _acteur3)
 {

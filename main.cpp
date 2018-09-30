@@ -13,7 +13,7 @@ film create_film(string _titre, int _annee, realisateur _nomrealisateur, int _du
     newfilm.genre = _genre;
     newfilm.duree = _duree;
     newfilm.noms[0] = _acteur1;
-    newfilm.noms[1] = _acteur1;
+    newfilm.noms[1] = _acteur2;
     newfilm.noms[2] = _acteur3;
 
     // return la valeur
@@ -61,10 +61,10 @@ void afficher_infos_acteur(acteur acteuraverif)
 
 void afficher_infos_film(film filmaverif)
 {
-    cout << "Informations sur le film: " << endl ;
+    cout << endl << "Informations sur le film: " << endl ;
     cout << "Titre: " << filmaverif.titre << endl;
     cout << "Annee: " << filmaverif.annee << endl;
-    cout << "Duree: " << filmaverif.duree << endl;
+    cout << "Duree: " << filmaverif.duree << " minutes" << endl;
     cout << "Genre: " << filmaverif.genre << endl;
     cout << "Acteurs: " << endl;
     for (unsigned int i = 0; i < 3; i++)
@@ -73,13 +73,8 @@ void afficher_infos_film(film filmaverif)
     }
 }
 
-void menu_cinema(vector<film> ListeFilms)
+void recherche_films_par_titre(string choix, vector<film> ListeFilms)
 {
-    print_film_list(ListeFilms);
-    string choix;
-    cout << "Choisissez le titre du film voulu: ";
-    cin >> choix;
-
     for (unsigned int i = 0; i < ListeFilms.size(); i++)
     {
         if (ListeFilms[i].titre.find(choix) != string::npos)
@@ -91,9 +86,62 @@ void menu_cinema(vector<film> ListeFilms)
     }
 }
 
+void recherche_films_par_personne(string a1, vector<film> ListeFilms)
+{
+    for (unsigned int i = 0; i < ListeFilms.size(); i++)
+    {
+       for (unsigned int j = 0; j < 2; j++) // Jusqu'à 3 acteurs dans le film
+       {
+            if (ListeFilms[i].noms[j].nom.find(a1) != string::npos || ListeFilms[i].noms[j].prenom.find(a1) != string::npos)
+            {
+                cout << "Dans le film " << ListeFilms[i].titre<< " en tant qu'acteur" << endl;
+            }
+       }
+
+        // Qu'un seul réalisateur
+        if (ListeFilms[i].nomrealisateur.nom.find(a1) != string::npos || ListeFilms[i].nomrealisateur.prenom.find(a1) != string::npos)
+        {
+            cout << "Dans le film " << ListeFilms[i].titre<< " en tant que realisateur" << endl;
+        }
+    }
+}
+
+void menu_cinema(vector<film> ListeFilms)
+{
+
+
+    int choix_recherche;
+    string choix;
+    cout << "-- Cinema - Database --" << endl;
+
+     do {
+        cout << endl;
+        cout << "1) Recherche de film par titre" << endl;
+        cout << "2) Recherche de film par nom de l'acteur" << endl << endl;
+
+        do {
+        cout << "Votre choix: " ;
+        cin >> choix_recherche;
+        }while(choix_recherche <1 || choix_recherche >2); // On evite les erreurs de saisie
+
+        cout << "Votre recherche: ";
+        cin >> choix;
+
+        switch(choix_recherche)
+        {
+            case 1: recherche_films_par_titre(choix, ListeFilms);
+            break;
+            case 2: recherche_films_par_personne(choix,ListeFilms);
+            break;
+            default: return;
+        }
+
+    }while(1); // Ce menu se relance sans cesse
+}
+
 int main()
 {
-    string genres[8] = {"Action","Horreur","Comédie","Documentaire","Policier","Drame","Animation","Science-fiction"};
+    string genres[8] = {"Action","Horreur","Comedie","Documentaire","Policier","Drame","Animation","Science-fiction"};
     vector<film> ListeFilms;
 
     // Ajout du film "Le pianiste"
@@ -103,7 +151,7 @@ int main()
     acteur Kretschmann = create_acteur("Kretschmann","Kretschmann",1962);
     acteur Fox = create_acteur("Fox","Emilia",1974);
 
-    film LePianiste = create_film("Le Pianiste",2002,Polanski,140,genres[5],Brody,Kretschmann,Fox);
+    film LePianiste = create_film("Le Pianiste",2002,Polanski,140,genres[5],Kretschmann,Brody,Fox);
     ListeFilms.push_back(LePianiste);
 
     menu_cinema(ListeFilms);

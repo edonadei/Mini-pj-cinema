@@ -8,7 +8,7 @@ int lecture(vector<film> ListeFilms)
 	if (fichier)
 	{
 		string line;
-	  string[6] movie;
+	  string movie[6];
 		i = 0;
 		while(getline(fichier,line))
 		{
@@ -17,7 +17,7 @@ int lecture(vector<film> ListeFilms)
 			if (i == 6) 
 			{
 				i = 0;
-				ListeFilms.push_back(stocker(movie));
+				ListeFilms.push_back(stocker_film(movie));
 
 			}
 		}
@@ -33,12 +33,14 @@ int lecture(vector<film> ListeFilms)
 }
 
 
-film stocker_film(string[6] film)
+film stocker_film(string film[6])
 {
 	int i;
 	int j = 0;
-	string[4] acteurs;
-	for (i = 0; k = 0; i < film[3].length(); i++; k++)
+	int k = 0;
+	string acteurs[4];
+	film nouv;
+	for (i = 0; i < film[3].length(); i++)
 	{
 		if (film[3][i] == ',')
 		{
@@ -47,10 +49,15 @@ film stocker_film(string[6] film)
 		}
 		else
 		{
-			acteur[j][k] = film[i];
+			acteurs[j][k] = film[3][i];
 		}
-	}
-	return  create_film(film[0],film[1],film[2],film[4],film[5],acteurs[0],acteurs[1],acteurs[2],acteurs[3]);
+		nouv =  create_film(film[0],film[1],film[2],film[4],film[5]);
+		add_acteur(acteurs[0],nouv);
+		add_acteur(acteurs[1],nouv);
+		add_acteur(acteurs[2],nouv);
+		add_acteur(acteurs[3],nouv);
+		k++;
+		return nouv;
 }
 
 

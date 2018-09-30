@@ -34,6 +34,9 @@ struct film
      string genre;
 };
 
-int lecture();
+void add_acteur(acteur a, film &f);
+film create_film(string _titre, int _annee, realisateur _nomrealisateur, int _duree, string _genre);
+film stocker_film(string film[6]);
+int lecture(vector<film> ListeFilms);
 
 #endif

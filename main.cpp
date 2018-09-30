@@ -1,7 +1,7 @@
 #include "struct.h"
 
 
-film create_film(string _titre, int _annee, realisateur _nomrealisateur, int _duree, string _genre, acteur _acteur1, acteur _acteur2, acteur _acteur3)
+film create_film(string _titre, int _annee, realisateur _nomrealisateur, int _duree, string _genre)
 {
     // init var
     film newfilm;
@@ -12,12 +12,14 @@ film create_film(string _titre, int _annee, realisateur _nomrealisateur, int _du
     newfilm.nomrealisateur = _nomrealisateur;
     newfilm.genre = _genre;
     newfilm.duree = _duree;
-    newfilm.noms[0] = _acteur1;
-    newfilm.noms[1] = _acteur2;
-    newfilm.noms[2] = _acteur3;
 
     // return la valeur
     return newfilm;
+}
+
+void add_acteur(acteur a, film &f)
+{
+    f.noms.push_back(a);
 }
 
 acteur create_acteur(string _nom, string _prenom, int _date_de_naissance)
@@ -67,7 +69,7 @@ void afficher_infos_film(film filmaverif)
     cout << "Duree: " << filmaverif.duree << " minutes" << endl;
     cout << "Genre: " << filmaverif.genre << endl;
     cout << "Acteurs: " << endl;
-    for (unsigned int i = 0; i < 3; i++)
+    for (unsigned int i = 0; i < filmaverif.noms.size(); i++) // Depend du nombre d'acteurs dans le film
     {
         afficher_infos_acteur(filmaverif.noms[i]);
     }
@@ -90,7 +92,7 @@ void recherche_films_par_personne(string a1, vector<film> ListeFilms)
 {
     for (unsigned int i = 0; i < ListeFilms.size(); i++)
     {
-       for (unsigned int j = 0; j < 2; j++) // Jusqu'à 3 acteurs dans le film
+       for (unsigned int j = 0; j < ListeFilms[i].noms.size() ; j++) // Depend du nombre d'acteurs dans le film
        {
             if (ListeFilms[i].noms[j].nom.find(a1) != string::npos || ListeFilms[i].noms[j].prenom.find(a1) != string::npos)
             {
@@ -151,7 +153,10 @@ int main()
     acteur Kretschmann = create_acteur("Kretschmann","Kretschmann",1962);
     acteur Fox = create_acteur("Fox","Emilia",1974);
 
-    film LePianiste = create_film("Le Pianiste",2002,Polanski,140,genres[5],Kretschmann,Brody,Fox);
+    film LePianiste = create_film("Le Pianiste",2002,Polanski,140,genres[5]);
+    add_acteur(Brody,LePianiste);
+    add_acteur(Kretschmann,LePianiste);
+    add_acteur(Fox,LePianiste);
     ListeFilms.push_back(LePianiste);
 
     menu_cinema(ListeFilms);

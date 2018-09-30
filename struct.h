@@ -29,7 +29,7 @@ struct film
      string titre;
      int annee;
      realisateur nomrealisateur;
-     acteur noms[3];
+     vector<acteur> noms;
      int duree;
      string genre;
 };

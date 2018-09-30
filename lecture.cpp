@@ -1,30 +1,24 @@
 #include "struct.h"
 
 
-
-int main()
-{
-  lecture();
-  return 0;
-}
-
-int lecture()
+int lecture(vector<film> ListeFilms)
 {
 	int i;
 	ifstream fichier("films.txt", ios::in);
 	if (fichier)
 	{
 		string line;
-	  string[6] film;
+	  string[6] movie;
 		i = 0;
 		while(getline(fichier,line))
 		{
-			film[i] = line;
+			movie[i] = line;
 			i++;
 			if (i == 6) 
 			{
 				i = 0;
-				stocker(film);
+				ListeFilms.push_back(stocker(movie));
+
 			}
 		}
 			
@@ -39,7 +33,7 @@ int lecture()
 }
 
 
-int stocker_film(string[6] film)
+film stocker_film(string[6] film)
 {
 	int i;
 	int j = 0;
@@ -56,8 +50,7 @@ int stocker_film(string[6] film)
 			acteur[j][k] = film[i];
 		}
 	}
-	create_film(film[0],film[1],film[2],film[4],film[5],acteurs[0],acteurs[1],acteurs[2],acteurs[3]);
-	return 0;
+	return  create_film(film[0],film[1],film[2],film[4],film[5],acteurs[0],acteurs[1],acteurs[2],acteurs[3]);
 }
 
 

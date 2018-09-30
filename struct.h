@@ -34,4 +34,6 @@ struct film
      string genre;
 };
 
+int lecture();
+
 #endif

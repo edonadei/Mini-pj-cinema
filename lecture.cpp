@@ -1,6 +1,5 @@
 #include "struct.h"
 
-
 int lecture(vector<film> ListeFilms)
 {
 	int i;
@@ -39,7 +38,6 @@ film stocker_film(string film[6])
 	int j = 0;
 	int k = 0;
 	string acteurs[4];
-	film nouv;
 	for (i = 0; i < film[3].length(); i++)
 	{
 		if (film[3][i] == ',')
@@ -51,13 +49,15 @@ film stocker_film(string film[6])
 		{
 			acteurs[j][k] = film[3][i];
 		}
-		nouv =  create_film(film[0],film[1],film[2],film[4],film[5]);
-		add_acteur(acteurs[0],nouv);
-		add_acteur(acteurs[1],nouv);
-		add_acteur(acteurs[2],nouv);
-		add_acteur(acteurs[3],nouv);
 		k++;
-		return nouv;
+	}
+	realisateur nouv_realisateur = create_realisateur(film[2],"",0);
+  create_film(film[0],stoi(film[1]),nouv_realisateur,stoi(film[4]),film[5]);
+	add_acteur(acteurs[0],nouv);
+	add_acteur(acteurs[1],nouv);
+	add_acteur(acteurs[2],nouv);
+	add_acteur(acteurs[3],nouv);
+	return nouv;
 }
 
 

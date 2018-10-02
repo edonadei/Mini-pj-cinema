@@ -39,5 +39,7 @@ film create_film(string _titre, int _annee, realisateur _nomrealisateur, int _du
 film stocker_film(string film[6]);
 int lecture(vector<film> ListeFilms);
 realisateur create_realisateur(string _nom, string _prenom, int _date_de_naissance);
+acteur create_acteur(string _nom, string _prenom, int _date_de_naissance);
+realisateur create_realisateur(string _nom, string _prenom, int _date_de_naissance);
 
 #endif

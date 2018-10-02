@@ -35,6 +35,24 @@ acteur create_acteur(string _nom, string _prenom, int _date_de_naissance)
     return newacteur;
 }
 
+acteur find_acteur(string input,vector<acteur> listeActeurs)
+{
+    for (unsigned i = 0; i< listeActeurs.size(); i++)
+    {
+        if (listeActeurs[i].nom.find(input) != string::npos)
+        {
+            return listeActeurs[i];
+        }
+
+        if (listeActeurs[i].prenom.find(input) != string::npos)
+        {
+            return listeActeurs[i];
+        }
+    }
+    cout << "ACTOR NOT FOUND" << endl;
+    return create_acteur("Inconnu","Inconnu",0000);
+}
+
 realisateur create_realisateur(string _nom, string _prenom, int _date_de_naissance)
 {
 
@@ -145,6 +163,7 @@ int main()
 {
     string genres[8] = {"Action","Horreur","Comedie","Documentaire","Policier","Drame","Animation","Science-fiction"};
     vector<film> ListeFilms;
+    vector<acteur> ListeActeurs;
 
     // Ajout du film "Le pianiste"
     realisateur Polanski = create_realisateur("Polanski","Roman",1939);

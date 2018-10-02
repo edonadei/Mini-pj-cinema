@@ -13,15 +13,15 @@ int lecture(vector<film> ListeFilms)
 		{
 			movie[i] = line;
 			i++;
-			if (i == 6) 
+			if (i == 6)
 			{
 				i = 0;
 				ListeFilms.push_back(stocker_film(movie));
 
 			}
 		}
-			
-		fichier.close();	
+
+		fichier.close();
 	}
 	else
 	{
@@ -32,31 +32,30 @@ int lecture(vector<film> ListeFilms)
 }
 
 
-film stocker_film(string film[6])
+film stocker_film(string tempfilm[6])
 {
-	int i;
 	int j = 0;
 	int k = 0;
 	string acteurs[4];
-	for (i = 0; i < film[3].length(); i++)
+	for (unsigned i = 0; i < tempfilm[3].length(); i++)
 	{
-		if (film[3][i] == ',')
+		if (tempfilm[3][i] == ',')
 		{
 			j++;
 			k=0;
 		}
 		else
 		{
-			acteurs[j][k] = film[3][i];
+			acteurs[j][k] = tempfilm[3][i];
 		}
 		k++;
 	}
-	realisateur nouv_realisateur = create_realisateur(film[2],"",0);
-  create_film(film[0],stoi(film[1]),nouv_realisateur,stoi(film[4]),film[5]);
-	add_acteur(acteurs[0],nouv);
-	add_acteur(acteurs[1],nouv);
-	add_acteur(acteurs[2],nouv);
-	add_acteur(acteurs[3],nouv);
+	realisateur nouv_realisateur = create_realisateur(tempfilm[2],"",0);
+    film newfilm = create_film(tempfilm[0],stoi(tempfilm[1]),nouv_realisateur,stoi(tempfilm[4]),tempfilm[5]);
+	add_acteur(acteurs[0],newfilm);
+	add_acteur(acteurs[1],newfilm);
+	add_acteur(acteurs[2],newfilm);
+	add_acteur(acteurs[3],newfilm);
 	return nouv;
 }
 

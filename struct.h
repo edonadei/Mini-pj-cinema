@@ -47,5 +47,6 @@ acteur create_acteur(string _nom, string _prenom, int _date_de_naissance);
 realisateur create_realisateur(string _nom, string _prenom, int _date_de_naissance);
 acteur find_acteur(string input,vector<acteur> listeActeurs);
 realisateur find_realisateur(string input,vector<realisateur> listeRealisateurs);
+int reecriture(vector<acteur> ListeActeurs,vector<film> ListeFilms,vector<realisateur> ListeRealisateurs);
 
 #endif

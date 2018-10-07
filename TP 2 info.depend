@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1538489353 source:c:\users\emrick-pc-portable\documents\github\mini-pj-cinema\main.cpp
+1538498046 source:c:\users\emrick-pc-portable\documents\github\mini-pj-cinema\main.cpp
 	"struct.h"
 
 1538326379 source:c:\users\emrick-pc\documents\gitkraken\mini-pj-cinema\main.cpp
@@ -16,4 +16,7 @@
 	<vector>
 	<fstream>
 	<string>
+
+1538495953 source:c:\users\emrick-pc-portable\documents\github\mini-pj-cinema\lecture.cpp
+	"struct.h"
 

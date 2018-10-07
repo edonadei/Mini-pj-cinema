@@ -105,11 +105,12 @@ film stocker_film(string tempfilm[6],vector<acteur> &ListeActeurs,vector<realisa
 		}
 		k++;
 	}
-  film newfilm = create_film(tempfilm[0],atoi(tempfilm[1].c_str()),find_realisateur(take_nom(tempfilm[2]),ListeRealisateurs),atoi(tempfilm[4].c_str()),tempfilm[5]);
-	add_acteur(find_acteur(take_nom(acteurs[0]),ListeActeurs),newfilm);
-	add_acteur(find_acteur(take_nom(acteurs[1]),ListeActeurs),newfilm);
-	add_acteur(find_acteur(take_nom(acteurs[2]),ListeActeurs),newfilm);
-	add_acteur(find_acteur(take_nom(acteurs[3]),ListeActeurs),newfilm);
+	realisateur nouv_realisateur = create_realisateur(tempfilm[2],,0);
+    film newfilm = create_film(tempfilm[0],stoi(tempfilm[1]),nouv_realisateur,stoi(tempfilm[4]),tempfilm[5]);
+	add_acteur(create_acteur(acteurs[0]),newfilm);
+	add_acteur(acteurs[1],newfilm);
+	add_acteur(acteurs[2],newfilm);
+	add_acteur(acteurs[3],newfilm);
 	return newfilm;
 }
 

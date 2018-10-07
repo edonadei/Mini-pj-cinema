@@ -13,7 +13,7 @@ struct realisateur
 {
     string nom;
     string prenom;
-    string date_de_naissance;
+    int date_de_naissance;
 };
 
 struct acteur

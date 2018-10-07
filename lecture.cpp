@@ -4,7 +4,7 @@
 string take_nom(string all)
 {
 	string nom;
-	int i = 0;
+	unsigned int i = 0;
 	int j = 0;
 	while (all[i] != ' ')
 	{
@@ -23,7 +23,7 @@ string take_nom(string all)
 int take_date(string all)
 {
 	string mot;
-	int i = 0;
+	unsigned int i = 0;
 	int j = 0;
 	while (all[i] != ' ')
 	{
@@ -75,7 +75,7 @@ int lecture(vector<film> &ListeFilms,vector<acteur> &ListeActeurs,vector<realisa
 				getline(fichier,line);
 
 			}
-			
+
 		}
 
 		fichier.close();
@@ -121,7 +121,7 @@ film stocker_film(string tempfilm[6],vector<acteur> &ListeActeurs,vector<realisa
 
 int lecture_acteurs(vector<acteur> &ListeActeurs)
 {
-	int i;
+
 	ifstream fichier("acteurs.txt", ios::in);
 	if (fichier)
 	{
@@ -144,7 +144,7 @@ int lecture_acteurs(vector<acteur> &ListeActeurs)
 
 int lecture_realisateurs(vector<realisateur> &ListeRealisateurs)
 {
-	int i;
+
   ifstream fichier("realisateur.txt", ios::in);
 	if (fichier)
 	{

@@ -1,4 +1,8 @@
 #include "struct.h"
+#include <cctype>
+
+#include <algorithm>
+
 
 
 film create_film(string _titre, int _annee, realisateur _nomrealisateur, int _duree, string _genre)
@@ -94,16 +98,29 @@ void print_film_list(vector<film> ListeFilms)
 
 void afficher_infos_acteur(acteur acteuraverif)
 {
-    cout << acteuraverif.nom << " " << acteuraverif.prenom << " ne en " << acteuraverif.date_de_naissance << endl;
+    cout << "- "<< acteuraverif.nom << " " << acteuraverif.prenom << " ne en " << acteuraverif.date_de_naissance << endl;
+}
+
+void afficher_infos_realisateur(realisateur realisateuraverif)
+{
+    cout << realisateuraverif.nom << " " << realisateuraverif.prenom << " ne en " << realisateuraverif.date_de_naissance << endl;
 }
 
 void afficher_infos_film(film filmaverif)
 {
     cout << endl << "Informations sur le film: " << endl ;
-    cout << "Titre: " << filmaverif.titre << endl;
+
+    // On met la premiere lettre du film en majuscule
+
+    string TitreFilm = filmaverif.titre;
+    TitreFilm[0] = toupper(TitreFilm[0]);
+
+    cout << "Titre: " << TitreFilm << endl;
     cout << "Annee: " << filmaverif.annee << endl;
     cout << "Duree: " << filmaverif.duree << " minutes" << endl;
     cout << "Genre: " << filmaverif.genre << endl;
+    cout << "Realisateur: " ;
+    afficher_infos_realisateur(filmaverif.nomrealisateur);
     cout << "Acteurs: " << endl;
     for (unsigned int i = 0; i < filmaverif.noms.size(); i++) // Depend du nombre d'acteurs dans le film
     {
@@ -118,8 +135,6 @@ void recherche_films_par_titre(string choix, vector<film> ListeFilms)
         if (ListeFilms[i].titre.find(choix) != string::npos)
         {
             afficher_infos_film(ListeFilms[i]);
-        } else {
-            cout << "Ce film n'est pas a l'affiche !" << endl;
         }
     }
 }
@@ -343,6 +358,15 @@ void user_add_film(vector<film> &Listefilms, vector<acteur> &ListeActeurs, vecto
     Listefilms.push_back(newfilm);
 }
 
+void afficher_tout_les_films(vector<film> &Listefilms)
+{
+for (unsigned int i = 0; i<Listefilms.size(); i++)
+{
+    afficher_infos_film(Listefilms[i]);
+}
+
+}
+
 
 void menu_cinema(vector<film> &Listefilms, vector<acteur> &ListeActeurs, vector<realisateur> &ListeRealisateurs, string genres[8])
 {
@@ -356,12 +380,14 @@ void menu_cinema(vector<film> &Listefilms, vector<acteur> &ListeActeurs, vector<
         cout << endl;
         cout << "1) Recherche de film par titre" << endl;
         cout << "2) Recherche de film par nom de l'acteur" << endl;
-        cout << "3) Ajout d'un nouveau film" << endl << endl;
+        cout << "3) Afficher tout les films" << endl;
+        cout << "4) Ajout d'un nouveau film" << endl << endl;
+
 
         do {
         cout << "Votre choix: " ;
         cin >> choix_recherche;
-        }while(choix_recherche <1 || choix_recherche >3); // On evite les erreurs de saisie
+        }while(choix_recherche <1 || choix_recherche >4); // On evite les erreurs de saisie
 
         if (choix_recherche == 1 || choix_recherche == 2)
         {
@@ -369,13 +395,25 @@ void menu_cinema(vector<film> &Listefilms, vector<acteur> &ListeActeurs, vector<
             cin >> choix;
         }
 
+         // On retire les espaces pour eviter tout probleme
+        //choix.erase(remove_if(choix.begin(), choix.end(), isspace), choix.end());
+        choix.erase (std::remove (choix.begin(), choix.end(), ' '), choix.end());
+
+        // On passe la recherche en minuscule
+        transform(choix.begin(), choix.end(), choix.begin(), ::tolower);
+
+
+        cout << choix << endl;;
+
         switch(choix_recherche)
         {
             case 1: recherche_films_par_titre(choix, Listefilms);
             break;
             case 2: recherche_films_par_personne(choix,Listefilms);
             break;
-            case 3: user_add_film(Listefilms,ListeActeurs,ListeRealisateurs,genres);
+            case 4: user_add_film(Listefilms,ListeActeurs,ListeRealisateurs,genres);
+            break;
+            case 3: afficher_tout_les_films(Listefilms);
             break;
             default: return;
         }
@@ -404,7 +442,7 @@ int main()
     ListeFilms.push_back(LePianiste);
 		lecture_realisateurs(ListeRealisateurs);
 		lecture_acteurs(ListeActeurs);
-		lecture(ListeFilms,ListeActeurs,ListeRealisateurs);	
+		lecture(ListeFilms,ListeActeurs,ListeRealisateurs);
 
     menu_cinema(ListeFilms,ListeActeurs,ListeRealisateurs,genres);
 }

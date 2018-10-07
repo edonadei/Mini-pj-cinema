@@ -13,7 +13,7 @@ string take_nom(string all)
 	i++;
 	while (i != all.length() && all[i] != ' ')
 	{
-		nom[j] = all[i];
+		nom += all[i];
 		i++;
 		j++;
 	}
@@ -36,7 +36,7 @@ int take_date(string all)
 	}
 	while (i < all.length())
 	{
-		mot[j] = all[i];
+		mot += all[i];
 		j++;
 		i++;
 	}
@@ -49,7 +49,7 @@ string take_prenom(string all)
 	int i =0;
 	while (all[i] != ' ')
 	{
-		prenom[i] = all[i];
+		prenom += all[i];
 		i++;
 	}
 	return prenom;
@@ -72,8 +72,10 @@ int lecture(vector<film> &ListeFilms,vector<acteur> &ListeActeurs,vector<realisa
 			{
 				i = 0;
 				ListeFilms.push_back(stocker_film(movie,ListeActeurs,ListeRealisateurs));
+				getline(fichier,line);
 
 			}
+			
 		}
 
 		fichier.close();
@@ -101,16 +103,19 @@ film stocker_film(string tempfilm[6],vector<acteur> &ListeActeurs,vector<realisa
 		}
 		else
 		{
-			acteurs[j][k] = tempfilm[3][i];
+			acteurs[j] += tempfilm[3][i];
 		}
 		k++;
 	}
-	realisateur nouv_realisateur = create_realisateur(tempfilm[2],,0);
-    film newfilm = create_film(tempfilm[0],stoi(tempfilm[1]),nouv_realisateur,stoi(tempfilm[4]),tempfilm[5]);
-	add_acteur(create_acteur(acteurs[0]),newfilm);
-	add_acteur(acteurs[1],newfilm);
-	add_acteur(acteurs[2],newfilm);
-	add_acteur(acteurs[3],newfilm);
+	realisateur nouv_realisateur = find_realisateur(take_nom(tempfilm[2]),ListeRealisateurs);
+    film newfilm = create_film(tempfilm[0],atoi(tempfilm[1].c_str()),nouv_realisateur,atoi(tempfilm[4].c_str()),tempfilm[5]);
+	add_acteur(find_acteur(take_nom(acteurs[0]),ListeActeurs),newfilm);
+	add_acteur(find_acteur(take_nom(acteurs[1]),ListeActeurs),newfilm);
+	add_acteur(find_acteur(take_nom(acteurs[2]),ListeActeurs),newfilm);
+	if (acteurs[3].length() != 0)
+	{
+		add_acteur(find_acteur(take_nom(acteurs[3]),ListeActeurs),newfilm);
+	}
 	return newfilm;
 }
 
@@ -140,7 +145,7 @@ int lecture_acteurs(vector<acteur> &ListeActeurs)
 int lecture_realisateurs(vector<realisateur> &ListeRealisateurs)
 {
 	int i;
-  ifstream fichier("realisateurs.txt", ios::in);
+  ifstream fichier("realisateur.txt", ios::in);
 	if (fichier)
 	{
 		string line;
@@ -153,7 +158,7 @@ int lecture_realisateurs(vector<realisateur> &ListeRealisateurs)
 	}
   else
 	{
-	  cerr << "Erreur à l'ouverture de acteurs.txt" << endl;
+	  cerr << "Erreur à l'ouverture de realisateur.txt" << endl;
 		return 1;
 	}
 	return 0;

@@ -402,6 +402,9 @@ int main()
     add_acteur(Kretschmann,LePianiste);
     add_acteur(Fox,LePianiste);
     ListeFilms.push_back(LePianiste);
+		lecture_realisateurs(ListeRealisateurs);
+		lecture_acteurs(ListeActeurs);
+		lecture(ListeFilms,ListeActeurs,ListeRealisateurs);	
 
     menu_cinema(ListeFilms,ListeActeurs,ListeRealisateurs,genres);
 }

@@ -164,3 +164,55 @@ int lecture_realisateurs(vector<realisateur> &ListeRealisateurs)
 	return 0;
 }
 
+int reecriture(vector<acteur> ListeActeurs,vector<film> ListeFilms,vector<realisateur> ListeRealisateurs)
+{
+	int i = remove("acteurs.txt");
+	int j = remove("realisateur.txt");
+	int k = remove("films.txt");
+	int l;
+	if (i != 0 || j != 0 || k != 0)
+	{
+		cerr << "Erreur à la suppression des fichiers" << endl;
+	}
+	ofstream acteurs("acteurs.txt",ios::out);
+	ofstream realisateurs("realisateur.txt",ios::out);
+	ofstream films("films.txt",ios::out);
+
+	if (acteurs && realisateurs && films)
+	{
+		for (i = 0; i < ListeActeurs.size(); i++)
+		{
+			acteurs << ListeActeurs[i].prenom << " " <<	ListeActeurs[i].nom << " " << ListeActeurs[i].date_de_naissance << endl;
+		}
+		for (i = 0; i < ListeRealisateurs.size(); i++)
+		{
+			realisateurs << ListeRealisateurs[i].prenom << " " << ListeRealisateurs[i].nom << " " << ListeRealisateurs[i].date_de_naissance << endl;
+		}
+		for (i = 0; i < ListeFilms.size(); i++)
+		{
+			films << ListeFilms[i].titre << endl;
+			films << ListeFilms[i].annee << endl;
+			films << ListeFilms[i].nomrealisateur.prenom << " " << ListeFilms[i].nomrealisateur.nom << endl;
+			for (l = 0; l < ListeFilms[i].noms.size(); l++)
+			{
+				films << ListeFilms[i].noms[l].prenom << " " << ListeFilms[i].noms[l].nom;
+				if (l + 1 != ListeFilms[i].noms.size())
+				{
+					films << ",";
+				}
+			}
+			films << endl;
+			films << ListeFilms[i].duree << endl;
+			films << ListeFilms[i].genre << endl;
+			films << endl;
+		}
+		acteurs.close();
+		realisateurs.close();
+		films.close();
+	}
+	else
+	{
+		cerr << "Erreur ouverture fichier (dans reecriture)" << endl;
+	}
+	return 0;
+}

@@ -166,10 +166,10 @@ int lecture_realisateurs(vector<realisateur> &ListeRealisateurs)
 
 int reecriture(vector<acteur> ListeActeurs,vector<film> ListeFilms,vector<realisateur> ListeRealisateurs)
 {
-	int i = remove("acteurs.txt");
-	int j = remove("realisateur.txt");
-	int k = remove("films.txt");
-	int l;
+	unsigned int i = remove("acteurs.txt");
+	unsigned int j = remove("realisateur.txt");
+	unsigned k = remove("films.txt");
+	unsigned int l;
 	if (i != 0 || j != 0 || k != 0)
 	{
 		cerr << "Erreur à la suppression des fichiers" << endl;

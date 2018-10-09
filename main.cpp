@@ -1,9 +1,24 @@
 #include "struct.h"
 #include <cctype>
-
+#include <string>
 #include <algorithm>
+#include <stdio.h>
 
+string removeSpaces(string str)
+{
+    int i = 0, j = 0;
+    while (str[i])
+    {
+        if (str[i] != ' ')
+        {
+            str[j++] = str[i];
+        }
 
+        i++;
+    }
+    string strreturn = str.substr(0, str.size()-(str.size()-j));
+    return strreturn;
+}
 
 film create_film(string _titre, int _annee, realisateur _nomrealisateur, int _duree, string _genre)
 {
@@ -354,7 +369,6 @@ void user_add_film(vector<film> &Listefilms, vector<acteur> &ListeActeurs, vecto
     newfilm.nomrealisateur = user_add_realisator(ListeRealisateurs);
     cout << "Acteur: ";
     newfilm.noms.push_back(user_add_actor(ListeActeurs));
-
     Listefilms.push_back(newfilm);
 }
 
@@ -370,7 +384,6 @@ for (unsigned int i = 0; i<Listefilms.size(); i++)
 
 void menu_cinema(vector<film> &Listefilms, vector<acteur> &ListeActeurs, vector<realisateur> &ListeRealisateurs, string genres[8])
 {
-
 
     int choix_recherche;
     string choix;
@@ -389,21 +402,25 @@ void menu_cinema(vector<film> &Listefilms, vector<acteur> &ListeActeurs, vector<
         cin >> choix_recherche;
         }while(choix_recherche <1 || choix_recherche >4); // On evite les erreurs de saisie
 
+
+
         if (choix_recherche == 1 || choix_recherche == 2)
         {
             cout << "Votre recherche: ";
-            cin >> choix;
-        }
+            cin >> ws; // On clear les whitespace dans le cin
+            std::getline(std::cin,choix);
 
-         // On retire les espaces pour eviter tout probleme
-        //choix.erase(remove_if(choix.begin(), choix.end(), isspace), choix.end());
-        choix.erase (std::remove (choix.begin(), choix.end(), ' '), choix.end());
+        }
 
         // On passe la recherche en minuscule
         transform(choix.begin(), choix.end(), choix.begin(), ::tolower);
 
+        // On retire les espaces pour eviter tout probleme
+         //choix = removeSpaces(choix);
 
-        cout << choix << endl;;
+
+        cout << choix << endl << endl;
+
 
         switch(choix_recherche)
         {
@@ -419,6 +436,7 @@ void menu_cinema(vector<film> &Listefilms, vector<acteur> &ListeActeurs, vector<
         }
 
     }while(1); // Ce menu se relance sans cesse
+
 }
 
 int main()
@@ -428,21 +446,10 @@ int main()
     vector<acteur> ListeActeurs;
     vector<realisateur> ListeRealisateurs;
 
-    // Ajout du film "Le pianiste"
-    realisateur Polanski = create_realisateur("Polanski","Roman",1939);
-
-    acteur Brody = create_acteur("Brody","Adrian",1973);
-    acteur Kretschmann = create_acteur("Kretschmann","Kretschmann",1962);
-    acteur Fox = create_acteur("Fox","Emilia",1974);
-
-    film LePianiste = create_film("Le Pianiste",2002,Polanski,140,genres[5]);
-    add_acteur(Brody,LePianiste);
-    add_acteur(Kretschmann,LePianiste);
-    add_acteur(Fox,LePianiste);
-    ListeFilms.push_back(LePianiste);
-		lecture_realisateurs(ListeRealisateurs);
-		lecture_acteurs(ListeActeurs);
-		lecture(ListeFilms,ListeActeurs,ListeRealisateurs);
+    lecture_realisateurs(ListeRealisateurs);
+    lecture_acteurs(ListeActeurs);
+    lecture(ListeFilms,ListeActeurs,ListeRealisateurs);
 
     menu_cinema(ListeFilms,ListeActeurs,ListeRealisateurs,genres);
+    reecriture(ListeActeurs,ListeFilms,ListeRealisateurs);
 }

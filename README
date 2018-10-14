@@ -1,0 +1,38 @@
+TP5: Base de données Cinéma
+
+Ce projet a été réalisé en C++
+
+Authors : Emerick Donadei & Yoann Bernard
+
+But du projet: 
+- Créer une base de données pour pouvoir stocker des films, des acteurs et des réalisateurs /
+	Pour chaque film, il faudra stocker :
+	Son titre
+	Son année de sortie
+	Son réalisateur
+	Ses acteurs principaux (de 1 à 4)
+	Sa durée en minutes
+	Un  genre,  parmi  :  Action,  Horreur,  Comédie,  Documentaire,  Policier,  Drame,  Animation,	Science	Fiction (un film a au maximum 1 genre)
+	
+	
+	Pour chaque réalisateur et chaque acteur, il faudra stocker :
+	Son nom
+	Son prénom
+	Sa date	et lieu et naissance
+
+- Créer une interface utilisateur
+
+Résultat après notre implementation:
+
+Nous avons réalisé un programme capable de lire et écrire dans un fichier TXT.
+A partir des films, acteurs, réalisateur qui ce trouvent dans leurs .txt 
+respectifs le programme est capable de recupérer et stocker les données.
+Il est possible depuis l'interface de :
+1) Rechercher un film à partir de son titre
+2) Rechercher un film à partir du nom de l'acteur
+3) Afficher tout les films
+4) Ajouter de nouveaux film
+
+En ajoutant un film les données seront automatiquement récupérées et ajoutées dans les .txt.
+
+

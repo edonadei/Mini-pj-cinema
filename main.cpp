@@ -233,11 +233,13 @@ realisateur create_manually_realisator()
     realisateur newrealisateur;
     cout << endl << "Nom: ";
     string nomtemp,prenomtemp;
-    cin >> nomtemp;
+    cin >> ws; // On clear les whitespace dans le cin
+    std::getline(std::cin,nomtemp); // obligé de passer par getline si on veut ajouter des espaces dans le cin
     minuscule(nomtemp);
     newrealisateur.nom = nomtemp;
     cout << "Prenom: ";
-    cin >> prenomtemp;
+    cin >> ws; // On clear les whitespace dans le cin
+    std::getline(std::cin,prenomtemp); // obligé de passer par getline si on veut ajouter des espaces dans le cin
     minuscule(prenomtemp);
     newrealisateur.prenom = prenomtemp;
     cout << "Date de naissance: ";
@@ -252,11 +254,13 @@ acteur create_manually_actor()
     acteur newacteur;
     cout << endl << "Nom: ";
     string nomtemp,prenomtemp;
-    cin >> nomtemp;
+    cin >> ws; // On clear les whitespace dans le cin
+    std::getline(std::cin,nomtemp); // obligé de passer par getline si on veut ajouter des espaces dans le cin
     minuscule(nomtemp);
     newacteur.nom = nomtemp;
     cout << "Prenom: ";
-    cin >> prenomtemp;
+    cin >> ws; // On clear les whitespace dans le cin
+    std::getline(std::cin,prenomtemp); // obligé de passer par getline si on veut ajouter des espaces dans le cin
     minuscule(prenomtemp);
     newacteur.prenom = prenomtemp;
     cout << "Date de naissance: ";

@@ -25,7 +25,7 @@ void minuscule(string &choix)
     transform(choix.begin(), choix.end(), choix.begin(), ::tolower);
 }
 
-string majuscule (string &choix)
+string majuscule (string choix)
 {
     choix[0] = toupper(choix[0]);
     return choix;
@@ -255,7 +255,7 @@ acteur create_manually_actor()
     cout << endl << "Nom: ";
     string nomtemp,prenomtemp;
     cin >> ws; // On clear les whitespace dans le cin
-    std::getline(std::cin,nomtemp); // obligé de passer par getline si on veut ajouter des espaces dans le cin
+    std::getline(std::cin,nomtemp); // obligé de passer par getline si on veut ajouter des espaces dans le return true;cin
     minuscule(nomtemp);
     newacteur.nom = nomtemp;
     cout << "Prenom: ";
@@ -275,11 +275,12 @@ realisateur choose_realisateur_to_add(vector<realisateur> ListeRealisateurs)
     cout << endl << " - ";
     for (unsigned int i = 0; i < ListeRealisateurs.size(); i++)
     {
-        cout << ListeRealisateurs[i].nom << " "<< ListeRealisateurs[i].prenom << " - ";
+        cout << majuscule(ListeRealisateurs[i].prenom) << " "<< majuscule(ListeRealisateurs[i].nom) << " - ";
     }
     do {
-        cout << endl << "Votre choix (En toutes lettres): ";
+        cout << endl << "(Nom ou prenom en toutes lettres): ";
         cin >> choix;
+        minuscule(choix);
     }while(!realisateur_existe(choix,ListeRealisateurs)); // while le genre existe
 
     for (unsigned int i = 0; i < ListeRealisateurs.size(); i++)
@@ -302,11 +303,12 @@ acteur choose_actor_to_add(vector<acteur> ListeActeurs)
     cout << endl << " - ";
     for (unsigned int i = 0; i < ListeActeurs.size(); i++)
     {
-        cout << ListeActeurs[i].nom << " "<< ListeActeurs[i].prenom << " - ";
+        cout << majuscule(ListeActeurs[i].prenom) << " "<< majuscule(ListeActeurs[i].nom) << " - ";
     }
     do {
-        cout << endl << "Votre choix (En toutes lettres): ";
+        cout << endl << "Votre choix (Nom ou prenom en toutes lettres): ";
         cin >> choix;
+        minuscule(choix);
     }while(!acteur_existe(choix,ListeActeurs)); // while le genre existe
 
     for (unsigned int i = 0; i < ListeActeurs.size(); i++)
@@ -329,11 +331,12 @@ string choose_genre(string genres[8])
     cout << endl << " - ";
     for (unsigned int i = 0; i < 8; i++)
     {
-        cout << genres[i] << " - ";
+        cout << majuscule(genres[i]) << " - ";
     }
     cout << endl << "Votre choix (En toutes lettres): ";
-    do {transform(choix.begin(), choix.end(), choix.begin(), ::tolower);
+    do {
         cin >> choix;
+        minuscule(choix);
     }while(!genre_existe(choix,genres)); // while le genre existe
 
     return choix;
@@ -471,9 +474,6 @@ void menu_cinema(vector<film> &Listefilms, vector<acteur> &ListeActeurs, vector<
         // On passe la recherche en minuscule
         minuscule(choix);
 
-        // On retire les espaces pour eviter tout probleme
-         //choix = removeSpaces(choix);
-
 
         cout << choix << endl << endl;
 
@@ -499,7 +499,7 @@ void menu_cinema(vector<film> &Listefilms, vector<acteur> &ListeActeurs, vector<
 
 int main()
 {
-    string genres[8] = {"Action","Horreur","Comedie","Documentaire","Policier","Drame","Animation","Science-fiction"};
+    string genres[8] = {"action","horreur","comedie","documentaire","policier","drame","animation","science-fiction"};
     vector<film> ListeFilms;
     vector<acteur> ListeActeurs;
     vector<realisateur> ListeRealisateurs;

@@ -1,20 +1,42 @@
 premiere annee
 2018
-Thomas lilti
-Vincent Lacoste,William Lebghil,Michel Lerousseau
+thomas lilti
+vincent lacoste,william lebghil,michel lerousseau
 92
 comedie dramatique
 
 photo de famille
 2018
-Cecilia Rouaud
-Vanessa Paradis,Camille Cottin,Pierre Deadonchamps
+cecilia rouaud
+vanessa paradis,camille cottin,pierre deadonchamps
 98
-Drame, Comedie
+drame, comedie
 
 le pianiste
 2002
-Roman Polanski
-Adrian Brody,Thomas Kretschmann,Emilia Fox
+roman polanski
+adrian brody,thomas kretschmann,emilia fox
 140
-Drame
+drame
+
+dernier train pour busan
+2016
+sang-ho yeon
+gong yoo,yumi jung,dong-seok ma
+120
+horreur
+
+citizen kane
+1941
+orson welles
+orson welles,joseph cotten,dorothy comingore
+119
+drame
+
+timecop
+1994
+peter hyams
+jean-claude van-damme
+98
+science-fiction
+

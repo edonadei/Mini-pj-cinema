@@ -1,33 +1,18 @@
 # depslib dependency file v1.0
-1539099248 source:c:\users\emrick-pc-portable\documents\github\mini-pj-cinema\main.cpp
+1539467869 source:c:\users\emrick-pc\documents\gitkraken\mini-pj-cinema\lecture.cpp
+	"struct.h"
+
+1538942339 c:\users\emrick-pc\documents\gitkraken\mini-pj-cinema\struct.h
+	<iostream>
+	<vector>
+	<fstream>
+	<string>
+	<stdlib.h>
+
+1539540543 source:c:\users\emrick-pc\documents\gitkraken\mini-pj-cinema\main.cpp
 	"struct.h"
 	<cctype>
 	<string>
 	<algorithm>
 	<stdio.h>
-
-1538941574 source:c:\users\emrick-pc\documents\gitkraken\mini-pj-cinema\main.cpp
-	"struct.h"
-	<cctype>
-	<algorithm>
-
-1538940108 c:\users\emrick-pc\documents\gitkraken\mini-pj-cinema\struct.h
-	<iostream>
-	<vector>
-	<fstream>
-	<string>
-	<stdlib.h>
-
-1539098795 c:\users\emrick-pc-portable\documents\github\mini-pj-cinema\struct.h
-	<iostream>
-	<vector>
-	<fstream>
-	<string>
-	<stdlib.h>
-
-1539094375 source:c:\users\emrick-pc-portable\documents\github\mini-pj-cinema\lecture.cpp
-	"struct.h"
-
-1538937437 source:c:\users\emrick-pc\documents\gitkraken\mini-pj-cinema\lecture.cpp
-	"struct.h"
 

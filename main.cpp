@@ -20,6 +20,17 @@ string removeSpaces(string str)
     return strreturn;
 }
 
+void minuscule(string &choix)
+{
+    transform(choix.begin(), choix.end(), choix.begin(), ::tolower);
+}
+
+string majuscule (string &choix)
+{
+    choix[0] = toupper(choix[0]);
+    return choix;
+}
+
 film create_film(string _titre, int _annee, realisateur _nomrealisateur, int _duree, string _genre)
 {
     // init var
@@ -94,7 +105,6 @@ realisateur create_realisateur(string _nom, string _prenom, int _date_de_naissan
 {
 
     realisateur newrealisateur;
-
     newrealisateur.nom = _nom;
     newrealisateur.date_de_naissance = _date_de_naissance;
     newrealisateur.prenom = _prenom;
@@ -113,12 +123,13 @@ void print_film_list(vector<film> ListeFilms)
 
 void afficher_infos_acteur(acteur acteuraverif)
 {
-    cout << "- "<< acteuraverif.nom << " " << acteuraverif.prenom << " ne en " << acteuraverif.date_de_naissance << endl;
+
+    cout << "- "<< majuscule(acteuraverif.prenom) << " " << majuscule(acteuraverif.nom) << " ne en " << acteuraverif.date_de_naissance << endl;
 }
 
 void afficher_infos_realisateur(realisateur realisateuraverif)
 {
-    cout << realisateuraverif.nom << " " << realisateuraverif.prenom << " ne en " << realisateuraverif.date_de_naissance << endl;
+    cout << majuscule(realisateuraverif.prenom) << " " << majuscule(realisateuraverif.nom) << " ne en " << realisateuraverif.date_de_naissance << endl;
 }
 
 void afficher_infos_film(film filmaverif)
@@ -162,14 +173,14 @@ void recherche_films_par_personne(string a1, vector<film> ListeFilms)
        {
             if (ListeFilms[i].noms[j].nom.find(a1) != string::npos || ListeFilms[i].noms[j].prenom.find(a1) != string::npos)
             {
-                cout << "Dans le film " << ListeFilms[i].titre<< " en tant qu'acteur" << endl;
+                cout << "Dans le film " << majuscule(ListeFilms[i].titre)<< " en tant qu'acteur" << endl;
             }
        }
 
         // Qu'un seul réalisateur
         if (ListeFilms[i].nomrealisateur.nom.find(a1) != string::npos || ListeFilms[i].nomrealisateur.prenom.find(a1) != string::npos)
         {
-            cout << "Dans le film " << ListeFilms[i].titre<< " en tant que realisateur" << endl;
+            cout << "Dans le film " << majuscule(ListeFilms[i].titre)<< " en tant que realisateur" << endl;
         }
     }
 }
@@ -218,11 +229,17 @@ bool acteur_existe(string choix, vector<acteur> ListeActeurs)
 
 realisateur create_manually_realisator()
 {
+    // Présence de variables temporaire pour uniformiser la recherche de noms
     realisateur newrealisateur;
     cout << endl << "Nom: ";
-    cin >> newrealisateur.nom;
+    string nomtemp,prenomtemp;
+    cin >> nomtemp;
+    minuscule(nomtemp);
+    newrealisateur.nom = nomtemp;
     cout << "Prenom: ";
-    cin >> newrealisateur.prenom;
+    cin >> prenomtemp;
+    minuscule(prenomtemp);
+    newrealisateur.prenom = prenomtemp;
     cout << "Date de naissance: ";
     cin >> newrealisateur.date_de_naissance;
 
@@ -231,11 +248,17 @@ realisateur create_manually_realisator()
 
 acteur create_manually_actor()
 {
+    // Présence de variables temporaire pour uniformiser la recherche de noms
     acteur newacteur;
     cout << endl << "Nom: ";
-    cin >> newacteur.nom;
+    string nomtemp,prenomtemp;
+    cin >> nomtemp;
+    minuscule(nomtemp);
+    newacteur.nom = nomtemp;
     cout << "Prenom: ";
-    cin >> newacteur.prenom;
+    cin >> prenomtemp;
+    minuscule(prenomtemp);
+    newacteur.prenom = prenomtemp;
     cout << "Date de naissance: ";
     cin >> newacteur.date_de_naissance;
 
@@ -245,12 +268,13 @@ acteur create_manually_actor()
 realisateur choose_realisateur_to_add(vector<realisateur> ListeRealisateurs)
 {
     string choix;
-    cout << endl;
+    cout << endl << " - ";
     for (unsigned int i = 0; i < ListeRealisateurs.size(); i++)
     {
         cout << ListeRealisateurs[i].nom << " "<< ListeRealisateurs[i].prenom << " - ";
     }
     do {
+        cout << endl << "Votre choix (En toutes lettres): ";
         cin >> choix;
     }while(!realisateur_existe(choix,ListeRealisateurs)); // while le genre existe
 
@@ -271,12 +295,13 @@ realisateur choose_realisateur_to_add(vector<realisateur> ListeRealisateurs)
 acteur choose_actor_to_add(vector<acteur> ListeActeurs)
 {
     string choix;
-    cout << endl;
+    cout << endl << " - ";
     for (unsigned int i = 0; i < ListeActeurs.size(); i++)
     {
         cout << ListeActeurs[i].nom << " "<< ListeActeurs[i].prenom << " - ";
     }
     do {
+        cout << endl << "Votre choix (En toutes lettres): ";
         cin >> choix;
     }while(!acteur_existe(choix,ListeActeurs)); // while le genre existe
 
@@ -297,13 +322,13 @@ acteur choose_actor_to_add(vector<acteur> ListeActeurs)
 string choose_genre(string genres[8])
 {
     string choix;
-    cout << endl;
+    cout << endl << " - ";
     for (unsigned int i = 0; i < 8; i++)
     {
-        cout << " - " <<genres[i];
+        cout << genres[i] << " - ";
     }
-    cout << endl << "Votre choix: ";
-    do {
+    cout << endl << "Votre choix (En toutes lettres): ";
+    do {transform(choix.begin(), choix.end(), choix.begin(), ::tolower);
         cin >> choix;
     }while(!genre_existe(choix,genres)); // while le genre existe
 
@@ -358,18 +383,44 @@ void user_add_film(vector<film> &Listefilms, vector<acteur> &ListeActeurs, vecto
     film newfilm;
     cout << "-- MODE CREATION --" << endl;
     cout << "Titre du film: ";
-    cin >> newfilm.titre;
+    // Présence de variables temporaire pour uniformiser la recherche de titre
+    string titrefilmtemp;
+    cin >> ws; // On clear les whitespace dans le cin
+    std::getline(std::cin,titrefilmtemp); // obligé de passer par getline si on veut ajouter des espaces dans le cin
+    minuscule(titrefilmtemp);
+    newfilm.titre = titrefilmtemp;
+
     cout << "Genre du film: ";
     newfilm.genre = choose_genre(genres);
+
     cout << "Annee du film: ";
     cin >> newfilm.annee;
+
     cout << "Duree du film (en minutes): ";
     cin >> newfilm.duree;
+
     cout << "Realisateur: ";
-    newfilm.nomrealisateur = user_add_realisator(ListeRealisateurs);
+    realisateur realisateurtotoprocess = user_add_realisator(ListeRealisateurs);
+    // Obligé d'ajouter cette variable temporaire, car besoin de l'ajouter à la liste de réalisateur pour réecriture
+    newfilm.nomrealisateur = realisateurtotoprocess ;
+    ListeRealisateurs.push_back(realisateurtotoprocess);
+
     cout << "Acteur: ";
-    newfilm.noms.push_back(user_add_actor(ListeActeurs));
+    int ouinon = 1;
+    // Obligé d'ajouter cette variable temporaire, car besoin de l'ajouter à la liste d'acteurs pour réecriture
+    acteur acteurtoprocess;
+    do{
+        acteurtoprocess = (user_add_actor(ListeActeurs));
+        newfilm.noms.push_back(acteurtoprocess);
+        ListeActeurs.push_back(acteurtoprocess);
+        cout << "Voulez vous ajouter un nouvel acteur (1 oui, 0 non): ";
+        cin >> ouinon;
+    }while(ouinon != 0 );
+
+    cout << endl << endl << " ====  FILM AJOUTE A LA BIBLIOTHEQUE ====" << endl << " ==== "<< newfilm.titre << " par " << newfilm.nomrealisateur.prenom << " " << newfilm.nomrealisateur.nom << " ==== " << endl;
+
     Listefilms.push_back(newfilm);
+    reecriture(ListeActeurs,Listefilms,ListeRealisateurs);
 }
 
 void afficher_tout_les_films(vector<film> &Listefilms)
@@ -394,13 +445,14 @@ void menu_cinema(vector<film> &Listefilms, vector<acteur> &ListeActeurs, vector<
         cout << "1) Recherche de film par titre" << endl;
         cout << "2) Recherche de film par nom de l'acteur" << endl;
         cout << "3) Afficher tout les films" << endl;
-        cout << "4) Ajout d'un nouveau film" << endl << endl;
+        cout << "4) Ajout d'un nouveau film" << endl ;
+        cout << "5) Quitter le programme" << endl << endl;
 
 
         do {
         cout << "Votre choix: " ;
         cin >> choix_recherche;
-        }while(choix_recherche <1 || choix_recherche >4); // On evite les erreurs de saisie
+        }while(choix_recherche <1 || choix_recherche >5); // On evite les erreurs de saisie
 
 
 
@@ -413,7 +465,7 @@ void menu_cinema(vector<film> &Listefilms, vector<acteur> &ListeActeurs, vector<
         }
 
         // On passe la recherche en minuscule
-        transform(choix.begin(), choix.end(), choix.begin(), ::tolower);
+        minuscule(choix);
 
         // On retire les espaces pour eviter tout probleme
          //choix = removeSpaces(choix);
@@ -432,7 +484,9 @@ void menu_cinema(vector<film> &Listefilms, vector<acteur> &ListeActeurs, vector<
             break;
             case 3: afficher_tout_les_films(Listefilms);
             break;
+            case 5:
             default: return;
+            break;
         }
 
     }while(1); // Ce menu se relance sans cesse
@@ -451,5 +505,4 @@ int main()
     lecture(ListeFilms,ListeActeurs,ListeRealisateurs);
 
     menu_cinema(ListeFilms,ListeActeurs,ListeRealisateurs,genres);
-    reecriture(ListeActeurs,ListeFilms,ListeRealisateurs);
 }
